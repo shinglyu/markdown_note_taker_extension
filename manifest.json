@@ -4,10 +4,9 @@
     "version": "0.0.1",
     "description": "Quickly create markdown note for selected text or link to current page",
     "background": {
-        "scripts": ["src/background.js"],
-        "persistent": false
+        "service_worker": "src/background.js"
     },
-    "manifest_version": 2,
+    "manifest_version": 3,
     "permissions": [
         "contextMenus",
         "tabs",

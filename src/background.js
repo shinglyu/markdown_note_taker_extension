@@ -32,6 +32,12 @@ chrome.contextMenus.create({
   contexts: ["all"]
 });
 
+chrome.contextMenus.create({
+  id: "selected_link",
+  title: "Copy link as markdown link",
+  contexts: ["link"]
+});
+
 chrome.contextMenus.onClicked.addListener(function(info, tab) {
   let text = "Something went wrong with Markdown Note Taker Extension"
   switch (info.menuItemId) {
@@ -95,6 +101,20 @@ chrome.contextMenus.onClicked.addListener(function(info, tab) {
           }
         )
       } );
+      break;
+    case "selected_link":
+      text = `[something](${info.linkUrl})`
+      console.debug(text)
+      copyToClipboard(text)
+      chrome.notifications.create(
+        "selected_text_copied",
+        {
+          title: "Markdown note copied",
+          message: "Page link copied to clipboard as markdown link",
+          type: "basic",
+          iconUrl: "../icon_placeholder.png"
+        }
+      )
       break;
   }
 });
