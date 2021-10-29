@@ -1,0 +1,19 @@
+{
+    "name": "Markdown Note Taker",
+    "author": "Shing Lyu",
+    "version": "0.0.1",
+    "description": "Quickly create markdown note for selected text or link to current page",
+    "background": {
+        "scripts": ["src/background.js"],
+        "persistent": false
+    },
+    "manifest_version": 2,
+    "permissions": [
+        "contextMenus",
+        "tabs",
+        "notifications"
+    ],
+    "options_ui": {
+      "page": "src/options.html"
+    }
+}
