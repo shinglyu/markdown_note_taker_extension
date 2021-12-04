@@ -10,7 +10,11 @@
     "permissions": [
         "contextMenus",
         "tabs",
-        "notifications"
+        "notifications",
+        "scripting"
+    ],
+    "host_permissions": [
+      "*://*/*"
     ],
     "options_ui": {
       "page": "src/options.html"

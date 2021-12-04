@@ -1,11 +1,31 @@
-function copyToClipboard( text ){
+// This needs to be injected into a page
+function injectClipboardCode( text ){
   const textarea = document.createElement('textarea');
   document.body.appendChild(textarea);
+  console.log(text)
   textarea.value = text;
   textarea.focus();
   document.execCommand('SelectAll');
   document.execCommand("Copy", false, null);
   document.body.removeChild(textarea);
+}
+
+function copyToClipboard( text ){
+  // Find the active tab and inject the copy script into it
+  // TODO: Consider opening a blank page instead
+  chrome.tabs.query({active: true, currentWindow: true}).then(tabs => {
+    const tab = tabs[0]
+    console.log(tab)
+    console.log(tab.id)
+
+    // Requires `"permissions": ["scripting"]` and `"host_permissions": ["*://*/*"]`
+    chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      function: injectClipboardCode,
+      args: [text]
+    });
+
+  })
 }
 
 chrome.contextMenus.create({
