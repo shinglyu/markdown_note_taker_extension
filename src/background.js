@@ -93,7 +93,7 @@ chrome.contextMenus.onClicked.addListener(function(info, tab) {
   switch (info.menuItemId) {
     case "selected_text":
       console.debug(info.selectionText);
-      text = `> ${info.selectionText} (Reference: [${tab.title}](${tab.url}))`
+      text = `> ${info.selectionText}\n>\n> -- [${tab.title}](${tab.url})`
       copyToClipboard(text)
       /*
       chrome.notifications.create(
